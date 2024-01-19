@@ -1,3 +1,4 @@
+import './types/globals.d'
 import './assets/main.css'
 
 import { createApp } from 'vue'

@@ -3,11 +3,11 @@ import AMISRenderer from '@/components/AMISRenderer.vue'
 
 const schema = {
   type: 'page',
-  body: 'Hello World!'
+  body: 'New World!'
 }
 </script>
 
 <template>
-  <div>456 about</div>
+  <div>789 new</div>
   <AMISRenderer :schema="schema" />
 </template>
