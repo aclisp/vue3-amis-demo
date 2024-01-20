@@ -3,7 +3,7 @@ import AMISRenderer from '@/components/AMISRenderer.vue';
 
 const schema = {
 	type: 'page',
-	body: 'A Whole New World!',
+	body: 'Login Please!',
 };
 </script>
 

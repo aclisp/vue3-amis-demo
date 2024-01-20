@@ -8,6 +8,5 @@ const schema = {
 </script>
 
 <template>
-	<div>456 about</div>
 	<AMISRenderer :schema="schema" />
 </template>

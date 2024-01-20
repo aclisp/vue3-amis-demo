@@ -1,5 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AMISRenderer from '@/components/AMISRenderer.vue';
+
+const schema = {
+	type: 'page',
+	body: 'My Sweet Home!',
+};
+</script>
 
 <template>
-	<div>123 home</div>
+	<AMISRenderer :schema="schema" />
 </template>
