@@ -1,32 +1,41 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
+const menuCollapsed = ref(false);
+
+function toggleMenuCollapsed() {
+	menuCollapsed.value = !menuCollapsed.value;
+}
 </script>
 
 <template>
-	<el-container class="layout-container">
-		<el-aside width="200px">
-			<div class="brand">
-				<span class="title">VUE3 AMIS DEMO</span>
-			</div>
-			<el-scrollbar>
-				<el-menu :router="true" :default-active="route.path">
-					<el-menu-item index="/home">
-						<el-icon><Menu /></el-icon>
-						<span>Home</span>
-					</el-menu-item>
-					<el-menu-item index="/about">
-						<el-icon><Document /></el-icon>
-						<span>About</span>
-					</el-menu-item>
-					<el-menu-item index="/new">
-						<el-icon><Setting /></el-icon>
-						<span>New</span>
-					</el-menu-item>
-				</el-menu>
-			</el-scrollbar>
-		</el-aside>
+	<el-container direction="horizontal" class="layout-container">
+		<el-scrollbar>
+			<el-menu :router="true" :default-active="route.path" :collapse="menuCollapsed">
+				<el-menu-item v-if="menuCollapsed" class="brand" @click="toggleMenuCollapsed" index="">
+					<el-icon><Expand /></el-icon>
+					<span>格律诗之家</span>
+				</el-menu-item>
+				<el-menu-item v-else class="brand" @click="toggleMenuCollapsed" index="">
+					<el-icon><Fold /></el-icon>
+					<span>格律诗之家</span>
+				</el-menu-item>
+				<el-menu-item index="/home">
+					<el-icon><Menu /></el-icon>
+					<span>系统概况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</el-menu-item>
+				<el-menu-item index="/about">
+					<el-icon><Document /></el-icon>
+					<span>会员管理</span>
+				</el-menu-item>
+				<el-menu-item index="/new">
+					<el-icon><Setting /></el-icon>
+					<span>系统设置</span>
+				</el-menu-item>
+			</el-menu>
+		</el-scrollbar>
 		<el-main>
 			<router-view />
 		</el-main>
@@ -37,19 +46,11 @@ const route = useRoute();
 .layout-container {
 	height: 100vh;
 }
-
-.el-aside {
-	background-color: #f0f2f5;
-	line-height: 1.5;
-}
-
 .brand {
 	background-color: #409eff;
 	color: white;
-	height: 56px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	font-style: italic;
+	font-weight: 500;
+	font-size: 16px;
 }
 </style>

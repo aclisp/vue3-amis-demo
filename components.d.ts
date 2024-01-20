@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AMISRenderer: typeof import('./src/components/AMISRenderer.vue')['default']
-    ElAside: typeof import('element-plus/es')['ElAside']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElIcon: typeof import('element-plus/es')['ElIcon']
