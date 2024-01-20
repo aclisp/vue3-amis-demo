@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@element-plus/icons-vue':
+    specifier: 2.3.1
+    version: 2.3.1(vue@3.4.15)
   amis:
     specifier: 3.6.4
     version: 3.6.4(amis-core@3.6.4)(amis-ui@3.6.4)(office-viewer@0.2.1)(react-dom@17.0.2)(react@18.2.0)
