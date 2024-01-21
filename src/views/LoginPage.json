@@ -1,0 +1,42 @@
+{
+  "type": "page",
+  "body": {
+    "type": "flex",
+    "style": {
+      "height": "80vh"
+    },
+    "alignItems": "center",
+    "items": [
+      {
+        "type": "form",
+        "id": "login-form",
+        "api": {
+          "method": "post",
+          "url": "${directus}/auth/login"
+        },
+        "redirect": "/",
+        "title": "请输入您的邮箱和密码",
+        "mode": "horizontal",
+        "horizontal": {
+          "leftFixed": "sm"
+        },
+        "className": "min-w-xs",
+        "submitText": "登录",
+        "body": [
+          {
+            "id": "email",
+            "type": "input-email",
+            "name": "email",
+            "label": "Email",
+            "required": true
+          },
+          {
+            "type": "input-password",
+            "name": "password",
+            "label": "密码"
+          }
+        ]
+      }
+    ]
+  }
+}

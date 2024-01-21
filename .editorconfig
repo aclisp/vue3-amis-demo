@@ -6,8 +6,12 @@ insert_final_newline = true
 charset = utf-8
 trim_trailing_whitespace = true
 
-[*.{mjs,cjs,js,mts,cts,ts,json,vue,html,scss,css,toml,md}]
+[*.{mjs,cjs,js,mts,cts,ts,vue,html,scss,css,toml,md}]
 indent_style = tab
+
+[*.json]
+indent_style = space
+indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false

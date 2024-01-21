@@ -1,23 +1,23 @@
 {
-	"type": "page",
-	"title": "藏书馆",
-	"body": [
-		{
-			"type": "tpl",
-			"tpl": "从第 N 天起",
-			"inline": false,
-			"id": "u:39463af9953f",
-			"wrapperComponent": "h1",
-			"hidden": false
-		},
-		{
-			"type": "tpl",
-			"tpl": "每天都是新的一天",
-			"inline": true,
-			"wrapperComponent": "p",
-			"id": "u:9f54a6adffab"
-		}
-	],
-	"id": "u:0ce77aa51c41",
-	"regions": ["body"]
+  "type": "page",
+  "title": "藏书馆",
+  "body": [
+    {
+      "type": "tpl",
+      "tpl": "从第 N 天起",
+      "inline": false,
+      "id": "u:39463af9953f",
+      "wrapperComponent": "h1",
+      "hidden": false
+    },
+    {
+      "type": "tpl",
+      "tpl": "每天都是新的一天",
+      "inline": true,
+      "wrapperComponent": "p",
+      "id": "u:9f54a6adffab"
+    }
+  ],
+  "id": "u:0ce77aa51c41",
+  "regions": ["body"]
 }
