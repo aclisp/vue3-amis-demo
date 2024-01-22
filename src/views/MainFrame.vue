@@ -1,12 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { computed, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 const menuCollapsed = ref(false);
+const auth = useAuthStore();
+const isLogin = computed(() => {
+	return !!auth.accessToken;
+});
 
 function toggleMenuCollapsed() {
 	menuCollapsed.value = !menuCollapsed.value;
+}
+
+function goLogin() {
+	router.push('/login');
+}
+
+function goUserProfile() {
+	router.push('/new');
 }
 </script>
 
@@ -36,9 +50,24 @@ function toggleMenuCollapsed() {
 				</el-menu-item>
 			</el-menu>
 		</el-scrollbar>
-		<el-main>
-			<router-view />
-		</el-main>
+		<el-container>
+			<el-header height="56px">
+				<el-row class="header-items">
+					<div class="flex-grow"></div>
+					<el-link v-if="isLogin" @click="goUserProfile" class="header-item" :underline="false">
+						当前用户已登录
+						<el-icon><TopRight /></el-icon>
+					</el-link>
+					<el-link v-else @click="goLogin" class="header-item" :underline="false">
+						登入系统查看更多信息
+						<el-icon><TopRight /></el-icon>
+					</el-link>
+				</el-row>
+			</el-header>
+			<el-main>
+				<router-view />
+			</el-main>
+		</el-container>
 	</el-container>
 </template>
 
@@ -52,5 +81,19 @@ function toggleMenuCollapsed() {
 	font-style: italic;
 	font-weight: 500;
 	font-size: 16px;
+}
+.el-header {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: var(--el-border-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.header-items {
+	display: flex;
+}
+.header-item {
+	font-weight: 400;
 }
 </style>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainFrame from '@/views/MainFrame.vue';
 import LandingPage from '@/views/LandingPage.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
 			component: () => import('@/views/LoginPage.vue'),
 		},
 	],
+});
+
+router.beforeEach(() => {
+	const auth = useAuthStore();
+	auth.hydrate();
 });
 
 export default router;
