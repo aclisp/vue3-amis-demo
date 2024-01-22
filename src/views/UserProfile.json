@@ -1,0 +1,21 @@
+{
+  "type": "page",
+  "body": {
+    "type": "flex",
+    "direction": "column",
+    "items": [
+      "A Whole New World!",
+      {
+        "visibleOn": "${isLoginUser}",
+        "type": "divider"
+      },
+      {
+        "visibleOn": "${isLoginUser}",
+        "id": "logout-button",
+        "type": "button",
+        "className": "max-w-xs",
+        "label": "退出登录"
+      }
+    ]
+  }
+}

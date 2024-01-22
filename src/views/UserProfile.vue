@@ -2,6 +2,8 @@
 import AMISRenderer from '@/components/AMISRenderer.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
+import schema from './UserProfile.json';
+import { getNodeById } from '@/utils/get-node-by-id';
 
 const router = useRouter();
 const auth = useAuthStore();
@@ -11,29 +13,13 @@ function logout() {
 	router.push('/');
 }
 
-const schema = {
-	type: 'page',
-	body: {
-		type: 'flex',
-		direction: 'column',
-		items: [
-			'A Whole New World!',
-			{
-				visible: auth.isLoginUser,
-				type: 'divider',
-			},
-			{
-				visible: auth.isLoginUser,
-				type: 'button',
-				className: 'max-w-xs',
-				label: '退出登录',
-				onClick: logout,
-			},
-		],
-	},
+const locals = {
+	isLoginUser: auth.isLoginUser,
 };
+
+getNodeById('logout-button', schema).onClick = logout;
 </script>
 
 <template>
-	<AMISRenderer :schema="schema" />
+	<AMISRenderer :schema="schema" :locals="locals" />
 </template>
