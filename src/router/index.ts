@@ -7,12 +7,11 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/home',
 			name: 'mainFrame',
 			component: MainFrame,
 			children: [
 				{
-					path: '/home',
+					path: '/',
 					name: 'home',
 					component: () => import('@/views/HomeView.vue'),
 				},

@@ -22,7 +22,7 @@ function toggleMenuCollapsed() {
 					<el-icon><Fold /></el-icon>
 					<span>格律诗之家</span>
 				</el-menu-item>
-				<el-menu-item index="/home">
+				<el-menu-item index="/">
 					<el-icon><Menu /></el-icon>
 					<span>系统概况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 				</el-menu-item>

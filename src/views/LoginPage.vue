@@ -2,11 +2,13 @@
 import AMISRenderer from '@/components/AMISRenderer.vue';
 import schema from './LoginPage.json';
 import { getNodeById } from '@/utils/get-node-by-id';
+import { useAuthStore } from '@/stores/auth';
 
+const auth = useAuthStore();
 const loginForm = getNodeById('login-form', schema);
+
 loginForm.api.adaptor = (payload: any) => {
-	console.log('loginForm.api.adaptor:payload=%o', payload);
-	// TODO save payload to store
+	auth.hydrate({ authResponse: payload.data });
 	return {};
 };
 </script>
