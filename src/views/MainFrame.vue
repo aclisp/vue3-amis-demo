@@ -17,7 +17,7 @@ function goLogin() {
 }
 
 function goUserProfile() {
-	router.push('/new');
+	router.push('/user-profile');
 }
 </script>
 
@@ -41,7 +41,7 @@ function goUserProfile() {
 					<el-icon><Document /></el-icon>
 					<span>会员管理</span>
 				</el-menu-item>
-				<el-menu-item index="/new">
+				<el-menu-item index="/user-profile">
 					<el-icon><Setting /></el-icon>
 					<span>系统设置</span>
 				</el-menu-item>

@@ -22,9 +22,9 @@ const router = createRouter({
 					component: () => import('@/views/AboutView.vue'),
 				},
 				{
-					path: '/new',
-					name: 'new',
-					component: () => import('@/views/NewView.vue'),
+					path: '/user-profile',
+					name: 'user-profile',
+					component: () => import('@/views/UserProfile.vue'),
 				},
 			],
 		},
