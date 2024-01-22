@@ -31,12 +31,14 @@ export const useAuthStore = defineStore('auth', () => {
 			return new Date(expiresAt.value).toLocaleString();
 		}
 	});
+	const isLoginUser = computed(() => !!accessToken.value);
 
 	return {
 		accessToken,
 		expiresAt,
 		refreshToken,
 		expiresDate,
+		isLoginUser,
 		hydrate,
 		dehydrate,
 	};

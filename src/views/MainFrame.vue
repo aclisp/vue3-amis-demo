@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const menuCollapsed = ref(false);
 const auth = useAuthStore();
-const isLogin = computed(() => {
-	return !!auth.accessToken;
-});
 
 function toggleMenuCollapsed() {
 	menuCollapsed.value = !menuCollapsed.value;
@@ -54,7 +51,7 @@ function goUserProfile() {
 			<el-header height="56px">
 				<el-row class="header-items">
 					<div class="flex-grow"></div>
-					<el-link v-if="isLogin" @click="goUserProfile" class="header-item" :underline="false">
+					<el-link v-if="auth.isLoginUser" @click="goUserProfile" class="header-item" :underline="false">
 						当前用户已登录
 						<el-icon><TopRight /></el-icon>
 					</el-link>

@@ -19,9 +19,11 @@ const schema = {
 		items: [
 			'A Whole New World!',
 			{
+				visible: auth.isLoginUser,
 				type: 'divider',
 			},
 			{
+				visible: auth.isLoginUser,
 				type: 'button',
 				className: 'max-w-xs',
 				label: '退出登录',
