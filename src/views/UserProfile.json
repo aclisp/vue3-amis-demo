@@ -4,7 +4,35 @@
     "type": "flex",
     "direction": "column",
     "items": [
-      "A Whole New World!",
+      {
+        "type": "form",
+        "title": "用户信息",
+        "initApi": {
+          "method": "get",
+          "url": "${directus}/users/me"
+        },
+        "body": [
+          {
+            "type": "input-text",
+            "name": "name",
+            "label": "姓名：",
+            "value": "${first_name}${last_name}"
+          },
+          {
+            "type": "input-text",
+            "name": "role",
+            "label": "角色："
+          },
+          {
+            "type": "input-text",
+            "name": "email",
+            "label": "邮箱："
+          }
+        ],
+        "submitText": "",
+        "columnCount": 2,
+        "mode": "horizontal"
+      },
       {
         "visibleOn": "${isLoginUser}",
         "type": "divider"

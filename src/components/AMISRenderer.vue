@@ -5,6 +5,7 @@ import 'amis/sdk/sdk.css';
 import 'amis/sdk/iconfont.css';
 import 'amis/sdk/helper.css';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 import { DIRECTUS_URL } from '@/constants';
 
 const props = defineProps({
@@ -39,6 +40,7 @@ onMounted(() => {
 	const scoped = window.amisRequire('amis/embed');
 	const { normalizeLink } = window.amisRequire('amis');
 	const router = useRouter();
+	const auth = useAuthStore();
 	const instance = scoped.embed(
 		'#amis-component',
 		props.schema,
@@ -83,6 +85,10 @@ onMounted(() => {
 				}
 				to = normalizeLink(to);
 				replace ? router.replace(to) : router.push(to);
+			},
+			requestAdaptor: async (config: any) => {
+				await auth.updateToken();
+				config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
 			},
 			...props.env,
 		},

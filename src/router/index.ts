@@ -41,9 +41,9 @@ const router = createRouter({
 	],
 });
 
-router.beforeEach(() => {
+router.beforeEach(async () => {
 	const auth = useAuthStore();
-	auth.hydrate();
+	await auth.hydrate();
 });
 
 export default router;
