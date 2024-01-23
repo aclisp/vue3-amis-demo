@@ -139,7 +139,6 @@ export const useAuthStore = defineStore('auth', () => {
 			if (result) {
 				stateSet(result);
 				storageSave();
-				console.debug(`SAVE token until ${expiresDate.value}`);
 			} else {
 				console.error(`token refresh failure`);
 			}

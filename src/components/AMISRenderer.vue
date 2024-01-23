@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
 import 'amis/sdk/sdk.js';
+import 'amis/sdk/json-view.js';
 import 'amis/sdk/sdk.css';
 import 'amis/sdk/iconfont.css';
 import 'amis/sdk/helper.css';
