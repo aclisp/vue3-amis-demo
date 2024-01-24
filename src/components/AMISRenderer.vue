@@ -95,15 +95,27 @@ onMounted(() => {
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {
 				//console.log('responseAdaptor:api=%o', api);
-				if (Array.isArray(payload.data)) {
-					return {
-						data: {
-							items: payload.data,
-							total: payload?.meta?.filter_count,
-						},
-					};
+				if (typeof payload === 'object' && payload && 'data' in payload) {
+					const data = payload.data;
+					if (Array.isArray(data)) {
+						return {
+							data: {
+								items: data,
+								total: payload?.meta?.filter_count,
+								accessToken: auth.accessToken,
+							},
+						};
+					} else {
+						return {
+							data: {
+								...data,
+								accessToken: auth.accessToken,
+							},
+						};
+					}
+				} else {
+					return payload;
 				}
-				return payload;
 			},
 			...props.env,
 		},

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AMISRenderer from '@/components/AMISRenderer.vue';
-import schema from './AboutView.json';
+import schema from './AboutView';
 </script>
 
 <template>

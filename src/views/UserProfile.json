@@ -27,6 +27,14 @@
             "type": "input-text",
             "name": "email",
             "label": "Email 邮箱："
+          },
+          {
+            "type": "control",
+            "label": "头像：",
+            "body": {
+              "type": "image",
+              "src": "${directus}/assets/${avatar}?access_token=${accessToken}"
+            }
           }
         ],
         "submitText": "",
