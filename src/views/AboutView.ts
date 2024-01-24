@@ -7,7 +7,7 @@ export default {
 		type: 'crud',
 		api: {
 			method: 'get',
-			url: '${directus}/items/app02_product',
+			url: '${DIRECTUS_URL}/items/app02_product',
 			data: {
 				fields: ['id', 'name', 'current_price', 'status', 'image', 'category.name'],
 				page: '${page}',
@@ -15,7 +15,7 @@ export default {
 				meta: 'filter_count',
 			},
 			adaptor: (payload: any) => {
-				const toURL = (fileId: any) => `${DIRECTUS_URL}/assets/${fileId}?access_token=${payload.data.accessToken}`;
+				const toURL = (fileId: any) => `${DIRECTUS_URL}/assets/${fileId}?access_token=${payload.data.ACCESS_TOKEN}`;
 				payload.data.items.map((item: any) => {
 					item.image = toURL(item.image);
 				});

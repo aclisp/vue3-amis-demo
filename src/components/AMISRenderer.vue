@@ -48,10 +48,11 @@ onMounted(() => {
 		{
 			// 3.1.0 开始可以传入 context 数据，无论哪层都可以使用到这个里面的数据。适合用来传递一些平台数据。
 			context: {
-				directus: DIRECTUS_URL,
+				DIRECTUS_URL,
 			},
 			// 可以通过 props 里的 locals 属性来赋予 amis 顶层数据域的值
 			data: {
+				DIRECTUS_URL,
 				...props.locals,
 			},
 			// 	其它的初始 props，一般不用传。
@@ -102,14 +103,14 @@ onMounted(() => {
 							data: {
 								items: data,
 								total: payload?.meta?.filter_count,
-								accessToken: auth.accessToken,
+								ACCESS_TOKEN: auth.accessToken,
 							},
 						};
 					} else {
 						return {
 							data: {
 								...data,
-								accessToken: auth.accessToken,
+								ACCESS_TOKEN: auth.accessToken,
 							},
 						};
 					}

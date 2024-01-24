@@ -12,7 +12,7 @@
         "id": "login-form",
         "api": {
           "method": "post",
-          "url": "${directus}/auth/login"
+          "url": "${DIRECTUS_URL}/auth/login"
         },
         "redirect": "/",
         "title": "请输入您的邮箱和密码",

@@ -9,7 +9,7 @@
         "title": "用户信息",
         "initApi": {
           "method": "get",
-          "url": "${directus}/users/me"
+          "url": "${DIRECTUS_URL}/users/me"
         },
         "body": [
           {
@@ -33,7 +33,7 @@
             "label": "头像：",
             "body": {
               "type": "image",
-              "src": "${directus}/assets/${avatar}?access_token=${accessToken}"
+              "src": "${ avatar ? `${DIRECTUS_URL}/assets/${avatar}?access_token=${ACCESS_TOKEN}` : '' }"
             }
           }
         ],
