@@ -88,15 +88,18 @@ onMounted(() => {
 				replace ? router.replace(to) : router.push(to);
 			},
 			requestAdaptor: async (config: any) => {
+				//console.log('requestAdaptor:config=%o', config);
 				await auth.updateToken();
 				config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
 			},
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {
+				//console.log('responseAdaptor:api=%o', api);
 				if (Array.isArray(payload.data)) {
 					return {
 						data: {
 							items: payload.data,
+							total: payload?.meta?.filter_count,
 						},
 					};
 				}

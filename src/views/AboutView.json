@@ -1,23 +1,42 @@
 {
   "type": "page",
-  "title": "藏书馆",
-  "body": [
-    {
-      "type": "tpl",
-      "tpl": "从第 N 天起",
-      "inline": false,
-      "id": "u:39463af9953f",
-      "wrapperComponent": "h1",
-      "hidden": false
+  "title": "会员管理",
+  "body": {
+    "type": "crud",
+    "api": {
+      "method": "get",
+      "url": "${directus}/items/app02_product",
+      "data": {
+        "page": "${page}",
+        "limit": "${perPage}",
+        "meta": "filter_count"
+      }
     },
-    {
-      "type": "tpl",
-      "tpl": "每天都是新的一天",
-      "inline": true,
-      "wrapperComponent": "p",
-      "id": "u:9f54a6adffab"
-    }
-  ],
-  "id": "u:0ce77aa51c41",
-  "regions": ["body"]
+    "columns": [
+      {
+        "name": "id",
+        "label": "ID"
+      },
+      {
+        "name": "name",
+        "label": "名称"
+      },
+      {
+        "name": "current_price",
+        "label": "当前价格"
+      },
+      {
+        "name": "status",
+        "label": "状态"
+      },
+      {
+        "name": "image",
+        "label": "图片"
+      },
+      {
+        "name": "category",
+        "label": "品类"
+      }
+    ]
+  }
 }
