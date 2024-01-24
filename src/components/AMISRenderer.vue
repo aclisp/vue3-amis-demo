@@ -91,6 +91,17 @@ onMounted(() => {
 				await auth.updateToken();
 				config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
 			},
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {
+				if (Array.isArray(payload.data)) {
+					return {
+						data: {
+							items: payload.data,
+						},
+					};
+				}
+				return payload;
+			},
 			...props.env,
 		},
 		() => {

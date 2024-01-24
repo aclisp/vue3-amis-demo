@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
 	/** UTC milliseconds when the access token expires */
 	const expiresAt = ref(0);
 	const refreshToken = ref('');
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const expiresDate = computed(() => {
 		if (expiresAt.value === 0) {
 			return 'Uninitialized';

@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
-import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
-const menuCollapsed = ref(false);
 const auth = useAuthStore();
-
-function toggleMenuCollapsed() {
-	menuCollapsed.value = !menuCollapsed.value;
-}
 
 function goLogin() {
 	router.push('/login');
@@ -22,45 +16,37 @@ function goUserProfile() {
 </script>
 
 <template>
-	<el-container direction="horizontal" class="layout-container">
-		<el-scrollbar>
-			<el-menu :router="true" :default-active="route.path" :collapse="menuCollapsed">
-				<el-menu-item v-if="menuCollapsed" class="brand" @click="toggleMenuCollapsed" index="">
-					<el-icon><Expand /></el-icon>
-					<span>格律诗之家</span>
-				</el-menu-item>
-				<el-menu-item v-else class="brand" @click="toggleMenuCollapsed" index="">
-					<el-icon><Fold /></el-icon>
-					<span>格律诗之家</span>
-				</el-menu-item>
-				<el-menu-item index="/">
-					<el-icon><Menu /></el-icon>
-					<span>系统概况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				</el-menu-item>
-				<el-menu-item index="/about">
-					<el-icon><Document /></el-icon>
-					<span>会员管理</span>
-				</el-menu-item>
-				<el-menu-item index="/user-profile">
-					<el-icon><Setting /></el-icon>
-					<span>系统设置</span>
-				</el-menu-item>
-			</el-menu>
-		</el-scrollbar>
+	<el-container class="layout-container">
+		<el-header height="56px" class="layout-header">
+			<div class="flex-grow"></div>
+			<el-link v-if="auth.isLoginUser" @click="goUserProfile" class="layout-header-item" :underline="false">
+				当前用户已登录
+				<el-icon><TopRight /></el-icon>
+			</el-link>
+			<el-link v-else @click="goLogin" class="layout-header-item" :underline="false">
+				登入系统查看更多信息
+				<el-icon><TopRight /></el-icon>
+			</el-link>
+		</el-header>
 		<el-container>
-			<el-header height="56px">
-				<el-row class="header-items">
-					<div class="flex-grow"></div>
-					<el-link v-if="auth.isLoginUser" @click="goUserProfile" class="header-item" :underline="false">
-						当前用户已登录
-						<el-icon><TopRight /></el-icon>
-					</el-link>
-					<el-link v-else @click="goLogin" class="header-item" :underline="false">
-						登入系统查看更多信息
-						<el-icon><TopRight /></el-icon>
-					</el-link>
-				</el-row>
-			</el-header>
+			<el-aside width="150px">
+				<el-scrollbar>
+					<el-menu :router="true" :default-active="route.path">
+						<el-menu-item index="/">
+							<el-icon><Menu /></el-icon>
+							<span>系统概况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						</el-menu-item>
+						<el-menu-item index="/about">
+							<el-icon><Document /></el-icon>
+							<span>会员管理</span>
+						</el-menu-item>
+						<el-menu-item index="/user-profile">
+							<el-icon><Setting /></el-icon>
+							<span>系统设置</span>
+						</el-menu-item>
+					</el-menu>
+				</el-scrollbar>
+			</el-aside>
 			<el-main>
 				<router-view />
 			</el-main>
@@ -79,18 +65,15 @@ function goUserProfile() {
 	font-weight: 500;
 	font-size: 16px;
 }
-.el-header {
+.layout-header {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: var(--el-border-color);
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 }
-.header-items {
-	display: flex;
-}
-.header-item {
+.layout-header-item {
 	font-weight: 400;
 }
 </style>
