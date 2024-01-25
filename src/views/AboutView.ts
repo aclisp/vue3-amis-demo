@@ -1,4 +1,4 @@
-import { DIRECTUS_URL } from '@/constants';
+import { fileIdToURL } from '@/utils/file-id-to-url';
 
 export default {
 	type: 'page',
@@ -15,7 +15,7 @@ export default {
 				meta: 'filter_count',
 			},
 			adaptor: (payload: any) => {
-				const toURL = (fileId: any) => `${DIRECTUS_URL}/assets/${fileId}?access_token=${payload.data.ACCESS_TOKEN}`;
+				const toURL = (fileId: string) => fileIdToURL(fileId, payload.data.ACCESS_TOKEN);
 				payload.data.items.map((item: any) => {
 					item.image = toURL(item.image);
 				});

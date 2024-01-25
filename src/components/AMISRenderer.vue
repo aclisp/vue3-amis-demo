@@ -8,6 +8,7 @@ import 'amis/sdk/helper.css';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { DIRECTUS_URL } from '@/constants';
+import { fileIdToURL } from '@/utils/file-id-to-url';
 
 const props = defineProps({
 	/** The amis JSON schema */
@@ -39,9 +40,10 @@ let amisInstance: any;
 
 onMounted(() => {
 	const scoped = window.amisRequire('amis/embed');
-	const { normalizeLink } = window.amisRequire('amis');
+	const { normalizeLink, registerFilter } = window.amisRequire('amis');
 	const router = useRouter();
 	const auth = useAuthStore();
+	registerFilter('fileIdToURL', (fileId: string) => fileIdToURL(fileId, auth.accessToken));
 	const instance = scoped.embed(
 		'#amis-component',
 		props.schema,
@@ -52,7 +54,6 @@ onMounted(() => {
 			},
 			// 可以通过 props 里的 locals 属性来赋予 amis 顶层数据域的值
 			data: {
-				DIRECTUS_URL,
 				...props.locals,
 			},
 			// 	其它的初始 props，一般不用传。
