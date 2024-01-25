@@ -1,4 +1,4 @@
-import { fileIdToURL } from '@/utils/file-id-to-url';
+import { attachURL } from '@/utils/file-id-to-url';
 
 export default {
 	type: 'page',
@@ -63,9 +63,7 @@ export default {
 										fields: ['id', 'name', 'current_price', 'status', 'image', 'category.name', 'category.id'],
 									},
 									adaptor: (payload: any) => {
-										const toURL = (fileId: string) => fileIdToURL(fileId, payload.data.ACCESS_TOKEN);
-										const { data } = payload;
-										data.imageURL = toURL(data.image);
+										attachURL(payload.data, ['image']);
 										return payload;
 									},
 								},

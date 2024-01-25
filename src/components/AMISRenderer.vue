@@ -93,7 +93,7 @@ onMounted(() => {
 				//console.log('requestAdaptor:config=%o', config);
 				await auth.updateToken();
 				config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
-				// 去掉responseAdaptor里加的ACCESS_TOKEN和fileURL
+				// 去掉responseAdaptor里加的 ACCESS_TOKEN 和 fileURL @see attachURL
 				const { data } = config;
 				for (const property in data) {
 					if (property === 'ACCESS_TOKEN' || property.endsWith('URL')) {
