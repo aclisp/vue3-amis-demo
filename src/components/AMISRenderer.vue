@@ -93,6 +93,13 @@ onMounted(() => {
 				//console.log('requestAdaptor:config=%o', config);
 				await auth.updateToken();
 				config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
+				// 去掉responseAdaptor里加的ACCESS_TOKEN和fileURL
+				const { data } = config;
+				for (const property in data) {
+					if (property === 'ACCESS_TOKEN' || property.endsWith('URL')) {
+						delete data[property];
+					}
+				}
 			},
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {

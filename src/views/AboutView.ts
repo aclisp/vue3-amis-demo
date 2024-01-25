@@ -9,17 +9,10 @@ export default {
 			method: 'get',
 			url: '${DIRECTUS_URL}/items/app02_product',
 			data: {
-				fields: ['id', 'name', 'current_price', 'status', 'image', 'category.name'],
+				fields: ['id', 'name', 'current_price', 'status', 'image', 'category.name', 'category.id'],
 				page: '${page}',
 				limit: '${perPage}',
 				meta: 'filter_count',
-			},
-			adaptor: (payload: any) => {
-				const toURL = (fileId: string) => fileIdToURL(fileId, payload.data.ACCESS_TOKEN);
-				payload.data.items.map((item: any) => {
-					item.image = toURL(item.image);
-				});
-				return payload;
 			},
 		},
 		columns: [
@@ -28,7 +21,7 @@ export default {
 				label: '品类',
 			},
 			{
-				name: 'image',
+				name: '${image|fileIdToURL}',
 				label: '图片',
 				type: 'image',
 			},
@@ -60,9 +53,26 @@ export default {
 						level: 'link',
 						actionType: 'dialog',
 						dialog: {
-							title: '查看详情',
+							title: '编辑详情',
 							body: {
 								type: 'form',
+								initApi: {
+									method: 'get',
+									url: '${DIRECTUS_URL}/items/app02_product/${id}',
+									data: {
+										fields: ['id', 'name', 'current_price', 'status', 'image', 'category.name', 'category.id'],
+									},
+									adaptor: (payload: any) => {
+										const toURL = (fileId: string) => fileIdToURL(fileId, payload.data.ACCESS_TOKEN);
+										const { data } = payload;
+										data.imageURL = toURL(data.image);
+										return payload;
+									},
+								},
+								api: {
+									method: 'patch',
+									url: '${DIRECTUS_URL}/items/app02_product/${id}',
+								},
 								body: [
 									{
 										type: 'input-text',
@@ -85,11 +95,12 @@ export default {
 										type: 'input-number',
 										name: 'current_price',
 										label: '当前价格',
+										precision: 2,
 									},
 									{
 										type: 'input-image',
+										name: 'imageURL',
 										label: '图片上传',
-										name: 'image',
 									},
 									{
 										type: 'select',
@@ -99,6 +110,19 @@ export default {
 									},
 								],
 							},
+							actions: [
+								{
+									type: 'button',
+									label: '取消',
+									actionType: 'cancel',
+								},
+								{
+									type: 'button',
+									label: '提交',
+									actionType: 'submit',
+									level: 'primary',
+								},
+							],
 						},
 					},
 					{

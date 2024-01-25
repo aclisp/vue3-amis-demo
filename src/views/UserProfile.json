@@ -16,7 +16,7 @@
             "type": "input-text",
             "name": "name",
             "label": "姓名：",
-            "value": "${first_name}${last_name}"
+            "value": "${first_name} ${last_name}"
           },
           {
             "type": "input-text",
