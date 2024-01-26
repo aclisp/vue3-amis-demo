@@ -81,12 +81,42 @@ export default {
           status: {
             _neq: 'archived',
           },
+          name: {
+            _icontains: '${filterName|default:undefined}',
+          },
+          current_price: {
+            _gte: '${filterPrice|default:undefined}',
+          },
         },
         sort: ['-date_created'],
         page: '${page}',
         limit: '${perPage}',
         meta: 'filter_count',
       },
+    },
+    filter: {
+      wrapWithPanel: false,
+      body: [
+        {
+          type: 'input-text',
+          name: 'filterName',
+          label: '名称',
+        },
+        {
+          type: 'input-number',
+          name: 'filterPrice',
+          label: '价格 >=',
+        },
+        {
+          type: 'submit',
+          level: 'primary',
+          label: '查询',
+        },
+        {
+          type: 'reset',
+          label: '重置',
+        },
+      ],
     },
     columns: [
       {
