@@ -22,7 +22,7 @@ export default {
               category: '${ARRAYFILTER(category, item => item) | last}',
               name: '${name}',
               current_price: '${current_price}',
-              image: '${image|default:null}',
+              image: '${__image|default:null}',
             },
           },
           rules: [
@@ -62,7 +62,7 @@ export default {
               label: '图片上传',
               receiver: fileReceiver(),
               autoFill: {
-                image: '${id}',
+                __image: '${__fileId}',
               },
             },
           ],
@@ -197,7 +197,7 @@ export default {
                     category: '${ARRAYFILTER(category, item => item) | last}',
                     name: '${name}',
                     current_price: '${current_price}',
-                    image: '${image|default:null}',
+                    image: '${__image|default:${image}}',
                     status: '${status}',
                   },
                 },
@@ -244,7 +244,7 @@ export default {
                     label: '图片上传',
                     receiver: fileReceiver(),
                     autoFill: {
-                      image: '${id}',
+                      __image: '${__fileId}',
                     },
                   },
                   {
@@ -300,15 +300,15 @@ function categorySource() {
     url: '${DIRECTUS_URL}/items/app02_category',
     data: {
       fields: ['id', 'name'],
-      parent: '${parentId}',
+      __parent: '${parentId}',
     },
     requestAdaptor: (api: any) => {
       if (!api.url.startsWith(DIRECTUS_URL)) {
         api.url = DIRECTUS_URL + api.url;
       }
-      const { parent } = api.query;
-      if (parent) {
-        api.data = { filter: { parent: { _eq: parent } } };
+      const { __parent } = api.query;
+      if (__parent) {
+        api.data = { filter: { parent: { _eq: __parent } } };
       } else {
         api.data = { filter: { parent: { _null: true } } };
       }
@@ -330,7 +330,7 @@ function fileReceiver() {
     adaptor: (payload: any) => {
       return {
         data: {
-          id: payload.data.id,
+          __fileId: payload.data.id,
           value: fileIdToURL(payload.data.id, payload.data.ACCESS_TOKEN),
         },
       };
