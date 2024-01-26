@@ -1,5 +1,5 @@
 import { DIRECTUS_URL } from '@/constants';
-import { attachURL } from '@/utils/file-id-to-url';
+import { attachURL, fileIdToURL } from '@/utils/file-id-to-url';
 
 export default {
   type: 'page',
@@ -22,6 +22,7 @@ export default {
               category: '${ARRAYFILTER(category, item => item) | last}',
               name: '${name}',
               current_price: '${current_price}',
+              image: '${image|default:null}',
             },
           },
           rules: [
@@ -59,6 +60,10 @@ export default {
               type: 'input-image',
               name: 'imageURL',
               label: '图片上传',
+              receiver: fileReceiver(),
+              autoFill: {
+                image: '${id}',
+              },
             },
           ],
         },
@@ -162,6 +167,7 @@ export default {
                     category: '${ARRAYFILTER(category, item => item) | last}',
                     name: '${name}',
                     current_price: '${current_price}',
+                    image: '${image|default:null}',
                     status: '${status}',
                   },
                 },
@@ -206,6 +212,10 @@ export default {
                     type: 'input-image',
                     name: 'imageURL',
                     label: '图片上传',
+                    receiver: fileReceiver(),
+                    autoFill: {
+                      image: '${id}',
+                    },
                   },
                   {
                     type: 'select',
@@ -277,6 +287,21 @@ function categorySource() {
       return {
         data: {
           items: payload.data.items.map((x: any) => ({ label: x.name, value: x.id })),
+        },
+      };
+    },
+  };
+}
+
+function fileReceiver() {
+  return {
+    method: 'post',
+    url: '${DIRECTUS_URL}/files',
+    adaptor: (payload: any) => {
+      return {
+        data: {
+          id: payload.data.id,
+          value: fileIdToURL(payload.data.id, payload.data.ACCESS_TOKEN),
         },
       };
     },
