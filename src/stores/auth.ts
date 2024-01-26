@@ -33,19 +33,19 @@ export const useAuthStore = defineStore('auth', () => {
     }
   });
   const isLoginUser = computed(() => !!accessToken.value);
-  let refreshInProgress: Promise<void> | undefined = undefined;
+  let refreshPromise: Promise<void> | null = null;
 
   return {
     accessToken,
     isLoginUser,
     hydrate,
     dehydrate,
-    updateToken,
+    refreshTokenIfExpired,
   };
 
   async function hydrate(options?: HydrateOptions) {
     if (!options) {
-      await updateToken();
+      await refreshTokenIfExpired();
       return;
     }
 
@@ -104,38 +104,38 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem(key);
   }
 
-  /** Update token if it is expired, otherwise do nothing */
-  async function updateToken() {
+  /** Refresh token if it is expired, otherwise do nothing */
+  async function refreshTokenIfExpired() {
     if (!storageLoad()) {
       return;
     }
 
     if (expiresAt.value < Date.now() + 30000) {
-      if (refreshInProgress) {
-        return await waitForRefresh();
+      if (refreshPromise) {
+        await activeRefresh();
       }
 
       refresh();
-      return await waitForRefresh();
+      await activeRefresh();
     }
   }
 
   /** Wait for the in progress token refresh processing finished  */
-  async function waitForRefresh() {
-    if (!refreshInProgress) {
+  async function activeRefresh() {
+    if (!refreshPromise) {
       throw new Error('no refresh in progress');
     }
 
     try {
-      return await refreshInProgress;
+      await refreshPromise;
     } finally {
-      refreshInProgress = undefined;
+      refreshPromise = null;
     }
   }
 
   /** Start a token refresh processing */
   function refresh() {
-    const refreshPromise = async () => {
+    const awaitRefresh = async () => {
       const result = await _refresh();
       if (result) {
         stateSet(result);
@@ -145,7 +145,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     };
 
-    refreshInProgress = refreshPromise();
+    refreshPromise = awaitRefresh();
   }
 
   /** The actual token refresh handling, we use fetch */

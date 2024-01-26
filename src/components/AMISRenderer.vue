@@ -91,7 +91,7 @@ onMounted(() => {
       },
       requestAdaptor: async (config: any) => {
         //console.log('requestAdaptor:config=%o', config);
-        await auth.updateToken();
+        await auth.refreshTokenIfExpired();
         config.headers['Authorization'] = 'Bearer ' + auth.accessToken;
         // 去掉responseAdaptor里加的 ACCESS_TOKEN 和 fileURL @see attachURL
         const { data } = config;
