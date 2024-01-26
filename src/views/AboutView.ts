@@ -1,33 +1,6 @@
 import { DIRECTUS_URL } from '@/constants';
 import { attachURL } from '@/utils/file-id-to-url';
 
-const categorySource = {
-  method: 'get',
-  url: '${DIRECTUS_URL}/items/app02_category',
-  data: {
-    fields: ['id', 'name'],
-    parent: '${parentId}',
-  },
-  requestAdaptor: (api: any) => {
-    if (!api.url.startsWith(DIRECTUS_URL)) {
-      api.url = DIRECTUS_URL + api.url;
-    }
-    const { parent } = api.query;
-    if (parent) {
-      api.data = { filter: { parent: { _eq: parent } } };
-    } else {
-      api.data = { filter: { parent: { _null: true } } };
-    }
-  },
-  adaptor: (payload: any) => {
-    return {
-      data: {
-        items: payload.data.items.map((x: any) => ({ label: x.name, value: x.id })),
-      },
-    };
-  },
-};
-
 export default {
   type: 'page',
   title: '会员管理',
@@ -42,13 +15,6 @@ export default {
         title: '新增记录',
         body: {
           type: 'form',
-          rules: [
-            {
-              rule: 'data.category != ""',
-              message: '不能为空',
-              name: 'category',
-            },
-          ],
           api: {
             method: 'post',
             url: '${DIRECTUS_URL}/items/app02_product',
@@ -58,6 +24,13 @@ export default {
               current_price: '${current_price}',
             },
           },
+          rules: [
+            {
+              rule: 'data.category != ""',
+              message: '不能为空',
+              name: 'category',
+            },
+          ],
           body: [
             {
               type: 'chained-select',
@@ -67,7 +40,7 @@ export default {
               joinValues: false,
               extractValue: true,
               required: true,
-              source: categorySource,
+              source: categorySource(),
             },
             {
               type: 'input-text',
@@ -169,14 +142,16 @@ export default {
                   },
                   adaptor: (payload: any) => {
                     attachURL(payload.data, ['image']);
+                    // 把 category 处理成 [id1, id2, id3] 的形式
                     const { category } = payload.data;
-                    payload.data.category = [category.id];
+                    const array = [category.id];
                     if (category.parent?.id) {
-                      payload.data.category.unshift(category.parent.id);
+                      array.unshift(category.parent.id);
                     }
                     if (category.parent?.parent?.id) {
-                      payload.data.category.unshift(category.parent.parent.id);
+                      array.unshift(category.parent.parent.id);
                     }
+                    payload.data.category = array;
                     return payload;
                   },
                 },
@@ -212,7 +187,7 @@ export default {
                     joinValues: false,
                     extractValue: true,
                     required: true,
-                    source: categorySource,
+                    source: categorySource(),
                   },
                   {
                     type: 'input-text',
@@ -274,6 +249,36 @@ export default {
         ],
       },
     ],
-    footerToolbar: ['statistics', 'pagination', 'switch-per-page'],
+    headerToolbar: ['bulkActions', 'statistics', 'pagination'],
+    footerToolbar: ['switch-per-page'],
   },
 };
+
+function categorySource() {
+  return {
+    method: 'get',
+    url: '${DIRECTUS_URL}/items/app02_category',
+    data: {
+      fields: ['id', 'name'],
+      parent: '${parentId}',
+    },
+    requestAdaptor: (api: any) => {
+      if (!api.url.startsWith(DIRECTUS_URL)) {
+        api.url = DIRECTUS_URL + api.url;
+      }
+      const { parent } = api.query;
+      if (parent) {
+        api.data = { filter: { parent: { _eq: parent } } };
+      } else {
+        api.data = { filter: { parent: { _null: true } } };
+      }
+    },
+    adaptor: (payload: any) => {
+      return {
+        data: {
+          items: payload.data.items.map((x: any) => ({ label: x.name, value: x.id })),
+        },
+      };
+    },
+  };
+}
