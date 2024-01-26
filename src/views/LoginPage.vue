@@ -8,11 +8,11 @@ const auth = useAuthStore();
 const loginForm = getNodeById('login-form', schema);
 
 loginForm.api.adaptor = (payload: any) => {
-	auth.hydrate({ authResponse: payload.data });
-	return {};
+  auth.hydrate({ authResponse: payload.data });
+  return {};
 };
 </script>
 
 <template>
-	<AMISRenderer :schema="schema" />
+  <AMISRenderer :schema="schema" />
 </template>

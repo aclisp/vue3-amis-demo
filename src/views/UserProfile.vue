@@ -9,17 +9,17 @@ const router = useRouter();
 const auth = useAuthStore();
 
 function logout() {
-	auth.dehydrate();
-	router.push('/');
+  auth.dehydrate();
+  router.push('/');
 }
 
 const locals = {
-	isLoginUser: auth.isLoginUser,
+  isLoginUser: auth.isLoginUser,
 };
 
 getNodeById('logout-button', schema).onClick = logout;
 </script>
 
 <template>
-	<AMISRenderer :schema="schema" :locals="locals" />
+  <AMISRenderer :schema="schema" :locals="locals" />
 </template>

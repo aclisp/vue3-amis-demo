@@ -4,5 +4,5 @@ import schema from './AboutView';
 </script>
 
 <template>
-	<AMISRenderer :schema="schema" />
+  <AMISRenderer :schema="schema" />
 </template>

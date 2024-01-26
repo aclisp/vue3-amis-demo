@@ -4,5 +4,5 @@ import schema from './HomeView.json';
 </script>
 
 <template>
-	<AMISRenderer :schema="schema" />
+  <AMISRenderer :schema="schema" />
 </template>
