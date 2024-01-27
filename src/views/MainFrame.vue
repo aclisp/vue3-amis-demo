@@ -44,7 +44,7 @@ const app = useAppStore();
   font-size: 16px;
 }
 .logo {
-  background-image: url('	https://aisuda.bce.baidu.com/amis/static/logo_408c434.png');
+  background-image: url('https://aisuda.bce.baidu.com/amis/static/logo_408c434.png');
   background-clip: border-box;
   background-color: rgba(0, 0, 0, 0);
   background-origin: padding-box;
