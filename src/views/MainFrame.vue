@@ -18,6 +18,7 @@ function goUserProfile() {
 <template>
   <el-container class="layout-container">
     <el-header height="56px" class="layout-header">
+      <div class="logo"></div>
       <div class="flex-grow"></div>
       <el-link v-if="auth.isLoginUser" @click="goUserProfile" class="layout-header-item" :underline="false">
         当前用户已登录
@@ -65,13 +66,25 @@ function goUserProfile() {
   font-weight: 500;
   font-size: 16px;
 }
+.logo {
+  background-image: url('	https://aisuda.bce.baidu.com/amis/static/logo_408c434.png');
+  background-clip: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-origin: padding-box;
+  background-position-x: 0%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
+  height: 30px;
+  width: 100px;
+}
 .layout-header {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: var(--el-border-color);
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  align-items: center;
 }
 .layout-header-item {
   font-weight: 400;
