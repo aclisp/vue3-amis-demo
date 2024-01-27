@@ -72,6 +72,8 @@ export default {
   ],
   body: {
     type: 'crud',
+    syncLocation: false, // 重要!! 否则对部署在子目录下的vue应用有影响!
+    canAccessSuperData: false, // 禁止所有列访问父级数据域，防止filter字段名冲突!
     api: {
       method: 'get',
       url: '${DIRECTUS_URL}/items/app02_product',
@@ -82,10 +84,10 @@ export default {
             _neq: 'archived',
           },
           name: {
-            _icontains: '${filterName|default:undefined}',
+            _icontains: '${name|default:undefined}',
           },
           current_price: {
-            _gte: '${filterPrice|default:undefined}',
+            _gte: '${price|default:undefined}',
           },
         },
         sort: ['-date_created'],
@@ -99,12 +101,12 @@ export default {
       body: [
         {
           type: 'input-text',
-          name: 'filterName',
+          name: 'name',
           label: '名称',
         },
         {
           type: 'input-number',
-          name: 'filterPrice',
+          name: 'price',
           label: '价格 >=',
         },
         {
