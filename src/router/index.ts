@@ -9,34 +9,34 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'mainFrame',
+      name: 'MainFrame',
       component: MainFrame,
       children: [
         {
           path: '/',
-          name: 'home',
+          name: 'HomeView',
           component: () => import('@/views/HomeView.vue'),
         },
         {
           path: '/about',
-          name: 'about',
+          name: 'AboutView',
           component: () => import('@/views/AboutView.vue'),
         },
         {
           path: '/user-profile',
-          name: 'user-profile',
+          name: 'UserProfile',
           component: () => import('@/views/UserProfile.vue'),
         },
       ],
     },
     {
       path: '/landing',
-      name: 'landing',
+      name: 'LandingPage',
       component: LandingPage,
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'LoginPage',
       component: () => import('@/views/LoginPage.vue'),
     },
   ],
