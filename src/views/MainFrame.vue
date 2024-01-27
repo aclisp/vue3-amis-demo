@@ -1,44 +1,26 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth';
 import { useAppStore } from '@/stores/app';
-import { useRouter } from 'vue-router';
 import { Expand } from '@element-plus/icons-vue';
 import MenuAside from '@/components/MenuAside.vue';
+import UserIndicator from '@/components/UserIndicator.vue';
 
-const router = useRouter();
-const auth = useAuthStore();
 const app = useAppStore();
-
-function goLogin() {
-  router.push('/login');
-}
-
-function goUserProfile() {
-  router.push('/user-profile');
-}
 </script>
 
 <template>
   <el-container class="layout-container">
     <el-drawer v-model="app.drawer" size="50%" direction="ltr" :with-header="false">
-      <MenuAside></MenuAside>
+      <MenuAside />
     </el-drawer>
     <el-header height="56px" class="layout-header">
       <el-button class="expand-toggle hidden-sm-and-up" :icon="Expand" circle @click="app.drawer = true" />
       <div class="logo"></div>
       <div class="flex-grow"></div>
-      <el-link v-if="auth.isLoginUser" @click="goUserProfile" class="layout-header-item" :underline="false">
-        当前用户已登录
-        <el-icon><TopRight /></el-icon>
-      </el-link>
-      <el-link v-else @click="goLogin" class="layout-header-item" :underline="false">
-        登入系统查看更多信息
-        <el-icon><TopRight /></el-icon>
-      </el-link>
+      <UserIndicator />
     </el-header>
     <el-container>
       <el-aside width="150px" class="layout-aside hidden-xs-only">
-        <MenuAside></MenuAside>
+        <MenuAside />
       </el-aside>
       <el-main>
         <router-view />

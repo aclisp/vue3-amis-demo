@@ -23,5 +23,6 @@ declare module 'vue' {
     MenuAside: typeof import('./src/components/MenuAside.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UserIndicator: typeof import('./src/components/UserIndicator.vue')['default']
   }
 }
