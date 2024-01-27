@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MainFrame from '@/views/MainFrame.vue';
 import LandingPage from '@/views/LandingPage.vue';
 import { useAuthStore } from '@/stores/auth';
+import { useAppStore } from '@/stores/app';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
 router.beforeEach(async () => {
   const auth = useAuthStore();
   await auth.hydrate();
+});
+
+router.afterEach(() => {
+  const app = useAppStore();
+  app.drawer = false;
 });
 
 export default router;

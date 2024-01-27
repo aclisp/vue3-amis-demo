@@ -1,5 +1,6 @@
 import './types/globals.d';
 import './assets/main.css';
+import 'element-plus/theme-chalk/display.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
-import { useRoute, useRouter } from 'vue-router';
+import { useAppStore } from '@/stores/app';
+import { useRouter } from 'vue-router';
+import { Expand } from '@element-plus/icons-vue';
+import MenuAside from '@/components/MenuAside.vue';
 
-const route = useRoute();
 const router = useRouter();
 const auth = useAuthStore();
+const app = useAppStore();
 
 function goLogin() {
   router.push('/login');
@@ -17,7 +20,11 @@ function goUserProfile() {
 
 <template>
   <el-container class="layout-container">
+    <el-drawer v-model="app.drawer" size="50%" direction="ltr" :with-header="false">
+      <MenuAside></MenuAside>
+    </el-drawer>
     <el-header height="56px" class="layout-header">
+      <el-button class="expand-toggle hidden-sm-and-up" :icon="Expand" circle @click="app.drawer = true" />
       <div class="logo"></div>
       <div class="flex-grow"></div>
       <el-link v-if="auth.isLoginUser" @click="goUserProfile" class="layout-header-item" :underline="false">
@@ -30,23 +37,8 @@ function goUserProfile() {
       </el-link>
     </el-header>
     <el-container>
-      <el-aside width="150px">
-        <el-scrollbar>
-          <el-menu :router="true" :default-active="route.path">
-            <el-menu-item index="/">
-              <el-icon><Menu /></el-icon>
-              <span>系统概况&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            </el-menu-item>
-            <el-menu-item index="/about">
-              <el-icon><Document /></el-icon>
-              <span>会员管理</span>
-            </el-menu-item>
-            <el-menu-item index="/user-profile">
-              <el-icon><Setting /></el-icon>
-              <span>系统设置</span>
-            </el-menu-item>
-          </el-menu>
-        </el-scrollbar>
+      <el-aside width="150px" class="hidden-xs-only">
+        <MenuAside></MenuAside>
       </el-aside>
       <el-main>
         <router-view />
@@ -78,6 +70,9 @@ function goUserProfile() {
   background-attachment: scroll;
   height: 30px;
   width: 100px;
+}
+.expand-toggle {
+  margin-right: 20px;
 }
 .layout-header {
   border-bottom-style: solid;

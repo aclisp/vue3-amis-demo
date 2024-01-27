@@ -19,7 +19,7 @@ function authStorageKey() {
 /**
  * 管理 Directus Login 接口返回的用户身份数据
  */
-export const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore('authStore', () => {
   const accessToken = ref('');
   /** UTC milliseconds when the access token expires */
   const expiresAt = ref(0);
