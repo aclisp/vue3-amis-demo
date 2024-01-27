@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/app';
 import { Expand } from '@element-plus/icons-vue';
-import MenuAside from '@/components/MenuAside.vue';
-import UserIndicator from '@/components/UserIndicator.vue';
+import TheMenuAside from '@/components/TheMenuAside.vue';
+import TheUserIndicator from '@/components/TheUserIndicator.vue';
 
 const app = useAppStore();
 </script>
@@ -10,17 +10,17 @@ const app = useAppStore();
 <template>
   <el-container class="layout-container">
     <el-drawer v-model="app.drawer" size="50%" direction="ltr" :with-header="false">
-      <MenuAside />
+      <TheMenuAside />
     </el-drawer>
     <el-header height="56px" class="layout-header">
       <el-button class="expand-toggle hidden-sm-and-up" :icon="Expand" circle @click="app.drawer = true" />
       <div class="logo"></div>
       <div class="flex-grow"></div>
-      <UserIndicator />
+      <TheUserIndicator />
     </el-header>
     <el-container>
       <el-aside width="150px" class="layout-aside hidden-xs-only">
-        <MenuAside />
+        <TheMenuAside />
       </el-aside>
       <el-main>
         <router-view />
