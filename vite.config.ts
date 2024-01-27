@@ -22,5 +22,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  //base: '/app-vue3-amis-demo/', // DEPLOY
+  //base: '/app-amis/', // DEPLOY
 })
