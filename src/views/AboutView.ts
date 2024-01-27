@@ -27,7 +27,7 @@ export default {
           },
           rules: [
             {
-              rule: 'data.category != ""',
+              rule: '${category != ""}',
               message: '不能为空',
               name: 'category',
             },
@@ -203,7 +203,7 @@ export default {
                 },
                 rules: [
                   {
-                    rule: 'data.category != ""',
+                    rule: '${category != ""}',
                     message: '不能为空',
                     name: 'category',
                   },

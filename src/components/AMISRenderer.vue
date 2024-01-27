@@ -103,7 +103,20 @@ onMounted(() => {
       },
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       responseAdaptor: (api: any, payload: any, query: any, request: any, response: any) => {
-        //console.log('responseAdaptor:api=%o', api);
+        //console.log('responseAdaptor:response=%o', response);
+        if (response.status >= 400) {
+          // 统一处理 directus 接口出错
+          const msg = response.data?.errors.map((x: any) => x.message).join(' ');
+          if (msg) {
+            return {
+              msg,
+              status: response.status,
+              data: {},
+            };
+          } else {
+            return payload;
+          }
+        }
         if (typeof payload === 'object' && payload && 'data' in payload) {
           const data = payload.data;
           if (Array.isArray(data)) {
