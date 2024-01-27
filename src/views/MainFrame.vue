@@ -37,7 +37,7 @@ function goUserProfile() {
       </el-link>
     </el-header>
     <el-container>
-      <el-aside width="150px" class="hidden-xs-only">
+      <el-aside width="150px" class="layout-aside hidden-xs-only">
         <MenuAside></MenuAside>
       </el-aside>
       <el-main>
@@ -49,6 +49,9 @@ function goUserProfile() {
 
 <style scoped>
 .layout-container {
+  height: 100vh;
+}
+.layout-aside {
   height: 100vh;
 }
 .brand {
