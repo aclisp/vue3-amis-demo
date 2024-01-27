@@ -12,8 +12,8 @@ dependencies:
     specifier: 3.6.4
     version: 3.6.4(amis-core@3.6.4)(amis-ui@3.6.4)(office-viewer@0.2.1)(react-dom@17.0.2)(react@17.0.2)
   element-plus:
-    specifier: 2.5.2
-    version: 2.5.2(vue@3.4.15)
+    specifier: 2.5.3
+    version: 2.5.3(vue@3.4.15)
   pinia:
     specifier: 2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.4.15)
@@ -26,8 +26,8 @@ dependencies:
 
 devDependencies:
   '@rushstack/eslint-patch':
-    specifier: 1.7.0
-    version: 1.7.0
+    specifier: 1.7.2
+    version: 1.7.2
   '@tsconfig/node18':
     specifier: 18.2.2
     version: 18.2.2
@@ -36,7 +36,7 @@ devDependencies:
     version: 18.19.3
   '@vitejs/plugin-vue':
     specifier: 5.0.3
-    version: 5.0.3(vite@5.0.11)(vue@3.4.15)
+    version: 5.0.3(vite@5.0.12)(vue@3.4.15)
   '@vue/eslint-config-prettier':
     specifier: 9.0.0
     version: 9.0.0(eslint@8.56.0)(prettier@3.2.4)
@@ -62,14 +62,14 @@ devDependencies:
     specifier: 5.3.3
     version: 5.3.3
   unplugin-auto-import:
-    specifier: 0.17.3
-    version: 0.17.3
+    specifier: 0.17.5
+    version: 0.17.5
   unplugin-vue-components:
     specifier: 0.26.0
     version: 0.26.0(vue@3.4.15)
   vite:
-    specifier: 5.0.11
-    version: 5.0.11(@types/node@18.19.3)
+    specifier: 5.0.12
+    version: 5.0.12(@types/node@18.19.3)
   vue-tsc:
     specifier: 1.8.27
     version: 1.8.27(typescript@5.3.3)
@@ -660,8 +660,8 @@ packages:
     dev: true
     optional: true
 
-  /@rushstack/eslint-patch@1.7.0:
-    resolution: {integrity: sha512-Jh4t/593gxs0lJZ/z3NnasKlplXT2f+4y/LZYuaKZW5KAaiVFL/fThhs+17EbUd53jUVJ0QudYCBGbN/psvaqg==}
+  /@rushstack/eslint-patch@1.7.2:
+    resolution: {integrity: sha512-RbhOOTCNoCrbfkRyoXODZp75MlpiHMgbE5MEBZAnnnLyQNgrigEj4p0lzsMDyc1zVsJDLrivB58tgg3emX0eEA==}
     dev: true
 
   /@sxzz/popperjs-es@2.11.7:
@@ -868,14 +868,14 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@vitejs/plugin-vue@5.0.3(vite@5.0.11)(vue@3.4.15):
+  /@vitejs/plugin-vue@5.0.3(vite@5.0.12)(vue@3.4.15):
     resolution: {integrity: sha512-b8S5dVS40rgHdDrw+DQi/xOM9ed+kSRZzfm1T74bMmBDCd8XO87NKlFYInzCtwvtWwXZvo1QxE2OSspTATWrbA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.0.11(@types/node@18.19.3)
+      vite: 5.0.12(@types/node@18.19.3)
       vue: 3.4.15(typescript@5.3.3)
     dev: true
 
@@ -1660,8 +1660,8 @@ packages:
       zrender: 5.4.0
     dev: false
 
-  /element-plus@2.5.2(vue@3.4.15):
-    resolution: {integrity: sha512-0Xbihy5CvpdH+OZeRPnZlfkbZS8uyLvHJiALehvw6n7nvHGrujCmdiw8NXvYhkLpRtwue/N6oBfAvMJvQSPoNA==}
+  /element-plus@2.5.3(vue@3.4.15):
+    resolution: {integrity: sha512-wmtstxaMkD6UinIgD+45CjrhbRh4u0vt+/GgxfPeMLt5pDpIVwZFjkUaVcWqqxcxd5a80HP3XlDF74fW7wim9A==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -3665,8 +3665,8 @@ packages:
       - rollup
     dev: true
 
-  /unplugin-auto-import@0.17.3:
-    resolution: {integrity: sha512-0cn0wr8X579TtdZKUAps0dDVrYzttx38ImdxZjmCeNlMDJX8UuSjO83vFqgS4ClNDIGWAute+xl9j5vRSX+vsw==}
+  /unplugin-auto-import@0.17.5:
+    resolution: {integrity: sha512-fHNDkDSxv3PGagX1wmKBYBkgaM4AKAgZmdJw/bxjhNljx9KSXSgHpGfX0MwUrq9qw6q1bhHIZVWyOwoY2koo4w==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2
@@ -3811,8 +3811,8 @@ packages:
       redux: 4.2.1
     dev: false
 
-  /vite@5.0.11(@types/node@18.19.3):
-    resolution: {integrity: sha512-XBMnDjZcNAw/G1gEiskiM1v6yzM4GE5aMGvhWTlHAYYhxb7S3/V1s3m2LDHa8Vh6yIWYYB0iJwsEaS523c4oYA==}
+  /vite@5.0.12(@types/node@18.19.3):
+    resolution: {integrity: sha512-4hsnEkG3q0N4Tzf1+t6NdN9dg/L3BM+q8SWgbSPnJvrgH2kgdyzfVJwbR1ic69/4uMJJ/3dqDZZE5/WwqW8U1w==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
