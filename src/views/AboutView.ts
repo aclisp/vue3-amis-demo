@@ -19,7 +19,7 @@ export default {
             method: 'post',
             url: '${DIRECTUS_URL}/items/app02_product',
             data: {
-              category: '${ARRAYFILTER(category, item => item) | last}',
+              category: '${COMPACT(category)|last}',
               name: '${name}',
               current_price: '${current_price}',
               image: '${__image|default:null}',
@@ -196,7 +196,7 @@ export default {
                   method: 'patch',
                   url: '${DIRECTUS_URL}/items/app02_product/${id}',
                   data: {
-                    category: '${ARRAYFILTER(category, item => item) | last}',
+                    category: '${COMPACT(category)|last}',
                     name: '${name}',
                     current_price: '${current_price}',
                     image: '${__image|default:${image}}',
