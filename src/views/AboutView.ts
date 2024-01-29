@@ -1,5 +1,6 @@
-import { DIRECTUS_URL } from '@/constants';
-import { attachURL, fileIdToURL } from '@/utils/file-id-to-url';
+import { attachURL } from '@/utils/file-id-to-url';
+import ChainedSelectSource from '@/components/ChainedSelectSource';
+import InputFileReceiver from '@/components/InputFileReceiver';
 
 export default {
   type: 'page',
@@ -41,7 +42,7 @@ export default {
               joinValues: false,
               extractValue: true,
               required: true,
-              source: categorySource(),
+              source: ChainedSelectSource({ collection: 'app02_category' }),
             },
             {
               type: 'input-text',
@@ -60,7 +61,7 @@ export default {
               type: 'input-image',
               name: 'imageURL',
               label: '图片上传',
-              receiver: fileReceiver(),
+              receiver: InputFileReceiver(),
               autoFill: {
                 __image: '${__fileId}',
               },
@@ -225,7 +226,7 @@ export default {
                     joinValues: false,
                     extractValue: true,
                     required: true,
-                    source: categorySource(),
+                    source: ChainedSelectSource({ collection: 'app02_category' }),
                   },
                   {
                     type: 'input-text',
@@ -244,7 +245,7 @@ export default {
                     type: 'input-image',
                     name: 'imageURL',
                     label: '图片上传',
-                    receiver: fileReceiver(),
+                    receiver: InputFileReceiver(),
                     autoFill: {
                       __image: '${__fileId}',
                     },
@@ -295,47 +296,3 @@ export default {
     footerToolbar: ['switch-per-page'],
   },
 };
-
-function categorySource() {
-  return {
-    method: 'get',
-    url: '${DIRECTUS_URL}/items/app02_category',
-    data: {
-      fields: ['id', 'name'],
-      __parent: '${parentId}',
-    },
-    requestAdaptor: (api: any) => {
-      if (!api.url.startsWith(DIRECTUS_URL)) {
-        api.url = DIRECTUS_URL + api.url;
-      }
-      const { __parent } = api.query;
-      if (__parent) {
-        api.data = { filter: { parent: { _eq: __parent } } };
-      } else {
-        api.data = { filter: { parent: { _null: true } } };
-      }
-    },
-    adaptor: (payload: any) => {
-      return {
-        data: {
-          items: payload.data.items.map((x: any) => ({ label: x.name, value: x.id })),
-        },
-      };
-    },
-  };
-}
-
-function fileReceiver() {
-  return {
-    method: 'post',
-    url: '${DIRECTUS_URL}/files',
-    adaptor: (payload: any) => {
-      return {
-        data: {
-          __fileId: payload.data.id,
-          value: fileIdToURL(payload.data.id, payload.data.ACCESS_TOKEN),
-        },
-      };
-    },
-  };
-}
