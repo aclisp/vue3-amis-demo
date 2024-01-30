@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",
+    "@liuli-util/tree": "^3.8.1",
     "amis": "3.6.4",
     "element-plus": "2.5.3",
     "pinia": "2.1.7",

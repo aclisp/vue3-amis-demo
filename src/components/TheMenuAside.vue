@@ -14,6 +14,10 @@ const route = useRoute();
       <el-icon><Document /></el-icon>
       <span>会员管理</span>
     </el-menu-item>
+    <el-menu-item index="/department">
+      <el-icon><OfficeBuilding /></el-icon>
+      <span>部门成员</span>
+    </el-menu-item>
     <el-menu-item index="/user-profile">
       <el-icon><Setting /></el-icon>
       <span>系统设置</span>

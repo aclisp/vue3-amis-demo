@@ -123,7 +123,7 @@ onMounted(() => {
             return {
               data: {
                 items: data,
-                total: payload?.meta?.filter_count,
+                total: payload.meta?.filter_count,
                 ACCESS_TOKEN: auth.accessToken,
               },
             };

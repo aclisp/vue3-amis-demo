@@ -8,6 +8,9 @@ dependencies:
   '@element-plus/icons-vue':
     specifier: 2.3.1
     version: 2.3.1(vue@3.4.15)
+  '@liuli-util/tree':
+    specifier: ^3.8.1
+    version: 3.8.1
   amis:
     specifier: 3.6.4
     version: 3.6.4(amis-core@3.6.4)(amis-ui@3.6.4)(office-viewer@0.2.1)(react-dom@17.0.2)(react@17.0.2)
@@ -459,6 +462,10 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+
+  /@liuli-util/tree@3.8.1:
+    resolution: {integrity: sha512-ZrI0J9wftPCQNlwLKZQAkAg0FrQk0xXNDGHqv4d2VaTBC8Kye2L8ET4CEAZf5M7IWQiXIIl1kVCCOI0HfvVdow==}
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
