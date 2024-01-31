@@ -34,7 +34,7 @@ const app = useAppStore();
   height: 100vh;
 }
 .layout-aside {
-  height: 100vh;
+  height: calc(100vh - var(--el-header-height));
 }
 .brand {
   background-color: #409eff;
