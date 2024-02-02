@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAppStore } from '@/stores/app';
-import { Expand } from '@element-plus/icons-vue';
+import { ArrowRight } from '@element-plus/icons-vue';
 import TheMenuAside from '@/components/TheMenuAside.vue';
 import TheUserIndicator from '@/components/TheUserIndicator.vue';
 
@@ -13,7 +13,13 @@ const app = useAppStore();
       <TheMenuAside />
     </el-drawer>
     <el-header height="56px" class="layout-header">
-      <el-button class="expand-toggle hidden-sm-and-up" :icon="Expand" circle @click="app.drawer = true" />
+      <el-button
+        class="expand-toggle hidden-sm-and-up"
+        :icon="ArrowRight"
+        size="large"
+        text
+        @click="app.drawer = true"
+      />
       <div class="logo"></div>
       <div class="flex-grow"></div>
       <TheUserIndicator />
@@ -57,7 +63,7 @@ const app = useAppStore();
   width: 100px;
 }
 .expand-toggle {
-  margin-right: 20px;
+  margin-left: -20px;
 }
 .layout-header {
   border-bottom-style: solid;
