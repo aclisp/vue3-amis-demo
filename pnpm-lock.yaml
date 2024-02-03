@@ -15,8 +15,8 @@ dependencies:
     specifier: 6.1.0
     version: 6.1.0(amis-core@3.6.4)(amis-ui@3.6.4)(office-viewer@0.2.1)(react-dom@17.0.2)(react@17.0.2)
   element-plus:
-    specifier: 2.5.3
-    version: 2.5.3(vue@3.4.15)
+    specifier: 2.5.5
+    version: 2.5.5(vue@3.4.15)
   pinia:
     specifier: 2.1.7
     version: 2.1.7(typescript@5.3.3)(vue@3.4.15)
@@ -1620,8 +1620,8 @@ packages:
       zrender: 5.4.0
     dev: false
 
-  /element-plus@2.5.3(vue@3.4.15):
-    resolution: {integrity: sha512-wmtstxaMkD6UinIgD+45CjrhbRh4u0vt+/GgxfPeMLt5pDpIVwZFjkUaVcWqqxcxd5a80HP3XlDF74fW7wim9A==}
+  /element-plus@2.5.5(vue@3.4.15):
+    resolution: {integrity: sha512-yGU/MruLOWI0ImQPFCyFM4cXtHtILJNAi0hhLImcxjRukjgQLYNkvcvbwqNgBUt808KSeKF9MyxENFyBQLTg+Q==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
