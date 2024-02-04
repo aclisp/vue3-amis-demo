@@ -15,7 +15,7 @@ function goUserProfile() {
 </script>
 
 <template>
-  <el-link v-if="auth.isLoginUser" @click="goUserProfile" class="layout-header-item" :underline="false">
+  <el-link v-if="auth.isLoggedIn" @click="goUserProfile" class="layout-header-item" :underline="false">
     当前用户已登录
     <el-icon><TopRight /></el-icon>
   </el-link>

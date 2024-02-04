@@ -14,7 +14,7 @@ function logout() {
 }
 
 const locals = {
-  isLoginUser: auth.isLoginUser,
+  isLoggedIn: auth.isLoggedIn,
 };
 
 getNodeById('logout-button', schema).onClick = logout;

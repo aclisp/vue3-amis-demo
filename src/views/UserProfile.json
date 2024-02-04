@@ -42,11 +42,11 @@
         "mode": "horizontal"
       },
       {
-        "visibleOn": "${isLoginUser}",
+        "visibleOn": "${isLoggedIn}",
         "type": "divider"
       },
       {
-        "visibleOn": "${isLoginUser}",
+        "visibleOn": "${isLoggedIn}",
         "id": "logout-button",
         "type": "button",
         "className": "max-w-xs",

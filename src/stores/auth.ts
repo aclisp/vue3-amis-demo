@@ -32,12 +32,12 @@ export const useAuthStore = defineStore('authStore', () => {
       return new Date(expiresAt.value).toLocaleString();
     }
   });
-  const isLoginUser = computed(() => !!accessToken.value);
+  const isLoggedIn = computed(() => !!accessToken.value);
   let refreshPromise: Promise<void> | null = null;
 
   return {
     accessToken,
-    isLoginUser,
+    isLoggedIn,
     hydrate,
     dehydrate,
     refreshTokenIfExpired,
