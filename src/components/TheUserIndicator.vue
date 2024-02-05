@@ -16,8 +16,8 @@ function goUserProfile() {
 
 <template>
   <el-link v-if="auth.isLoggedIn" @click="goUserProfile" class="layout-header-item" :underline="false">
-    当前用户已登录
-    <el-icon><TopRight /></el-icon>
+    <el-avatar :src="auth.userAvatar"></el-avatar>
+    <span class="ml-2">{{ auth.userName }}</span>
   </el-link>
   <el-link v-else @click="goLogin" class="layout-header-item" :underline="false">
     登入系统查看更多信息

@@ -1,6 +1,8 @@
-import { ref, computed } from 'vue';
+import { ref, computed, shallowRef, watch } from 'vue';
 import { defineStore } from 'pinia';
+import qs from 'qs';
 import { DIRECTUS_URL, LOCAL_STORAGE_PREFIX } from '@/constants';
+import { fileIdToURL } from '@/utils/file-id-to-url';
 
 type AuthResponse = {
   access_token: string;
@@ -32,12 +34,27 @@ export const useAuthStore = defineStore('authStore', () => {
       return new Date(expiresAt.value).toLocaleString();
     }
   });
+  const userData = shallowRef<any>({});
+  const userAvatar = computed(() => {
+    return fileIdToURL(userData.value.avatar, accessToken.value);
+  });
+  const userName = computed(() => {
+    return userData.value.first_name + userData.value.last_name;
+  });
   const isLoggedIn = computed(() => !!accessToken.value);
-  let refreshPromise: Promise<void> | null = null;
+  let refreshPromise: Promise<boolean> | null = null;
+
+  watch(accessToken, async (accessToken) => {
+    if (expiresAt.value > Date.now()) {
+      userData.value = await readUserData(accessToken);
+    }
+  });
 
   return {
     accessToken,
     isLoggedIn,
+    userAvatar,
+    userName,
     hydrate,
     dehydrate,
     refreshTokenIfExpired,
@@ -46,15 +63,15 @@ export const useAuthStore = defineStore('authStore', () => {
   async function hydrate(options?: HydrateOptions) {
     if (!options) {
       await refreshTokenIfExpired();
-      return;
+    } else {
+      const { authResponse } = options;
+      stateSet(authResponse);
+      storageSave();
     }
-
-    const { authResponse } = options;
-    stateSet(authResponse);
-    storageSave();
   }
 
   function dehydrate() {
+    logout();
     stateClear();
     storageClear();
   }
@@ -104,30 +121,35 @@ export const useAuthStore = defineStore('authStore', () => {
     localStorage.removeItem(key);
   }
 
-  /** Refresh token if it is expired, otherwise do nothing */
-  async function refreshTokenIfExpired() {
+  /**
+   * Refresh token if it is expired, otherwise do nothing.
+   * @returns true if the token is refreshed.
+   */
+  async function refreshTokenIfExpired(): Promise<boolean> {
     if (!storageLoad()) {
-      return;
+      return false;
     }
 
     if (expiresAt.value < Date.now() + 30000) {
       if (refreshPromise) {
-        await activeRefresh();
+        return await activeRefresh();
       }
 
       refresh();
-      await activeRefresh();
+      return await activeRefresh();
     }
+
+    return false;
   }
 
   /** Wait for the in progress token refresh processing finished  */
-  async function activeRefresh() {
+  async function activeRefresh(): Promise<boolean> {
     if (!refreshPromise) {
       throw new Error('no refresh in progress');
     }
 
     try {
-      await refreshPromise;
+      return await refreshPromise;
     } finally {
       refreshPromise = null;
     }
@@ -140,8 +162,10 @@ export const useAuthStore = defineStore('authStore', () => {
       if (result) {
         stateSet(result);
         storageSave();
+        return true;
       } else {
         console.error(`token refresh failure`);
+        return false;
       }
     };
 
@@ -163,6 +187,40 @@ export const useAuthStore = defineStore('authStore', () => {
       headers,
       method: 'POST',
     });
+    if (res.status < 200 || res.status > 299) {
+      return null;
+    }
+    const json = await res.json();
+    return json.data;
+  }
+
+  /** logout, destroying the user's session. */
+  function logout() {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    const url = DIRECTUS_URL + '/auth/logout';
+    const data = {
+      refresh_token: refreshToken.value,
+    };
+    fetch(url, {
+      body: JSON.stringify(data),
+      headers,
+      method: 'POST',
+    });
+  }
+
+  /** fetch the users data, if login was successful */
+  async function readUserData(accessToken: string) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + accessToken,
+    };
+    const query = {
+      fields: ['email', 'first_name', 'last_name', 'avatar', 'role.name'],
+    };
+    const url = DIRECTUS_URL + '/users/me?' + qs.stringify(query);
+    const res = await fetch(url, { headers, method: 'GET' });
     if (res.status < 200 || res.status > 299) {
       return null;
     }

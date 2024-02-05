@@ -10,6 +10,7 @@ const auth = useAuthStore();
 
 function logout() {
   auth.dehydrate();
+  // Send the user back to the home page
   router.push('/');
 }
 
