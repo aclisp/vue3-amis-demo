@@ -16,6 +16,9 @@ const router = createRouter({
           path: '/',
           name: 'HomeView',
           component: () => import('@/views/HomeView.vue'),
+          meta: {
+            public: true,
+          },
         },
         {
           path: '/about',
@@ -38,18 +41,32 @@ const router = createRouter({
       path: '/landing',
       name: 'LandingPage',
       component: LandingPage,
+      meta: {
+        public: true,
+      },
     },
     {
       path: '/login',
       name: 'LoginPage',
       component: () => import('@/views/LoginPage.vue'),
+      meta: {
+        public: true,
+      },
     },
   ],
 });
 
-router.beforeEach(async () => {
+router.beforeEach(async (to) => {
   const auth = useAuthStore();
   await auth.hydrate();
+
+  if (to.meta?.public !== true && !auth.isLoggedIn) {
+    if (to.fullPath) {
+      return '/login?redirect=' + encodeURIComponent(to.fullPath);
+    } else {
+      return '/login';
+    }
+  }
 });
 
 router.afterEach(() => {

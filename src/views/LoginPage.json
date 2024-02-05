@@ -14,7 +14,7 @@
           "method": "post",
           "url": "${DIRECTUS_URL}/auth/login"
         },
-        "redirect": "/",
+        "redirect": "${redirect|default:'/'}",
         "title": "请输入您的邮箱和密码",
         "mode": "horizontal",
         "horizontal": {
