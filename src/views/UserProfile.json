@@ -9,7 +9,10 @@
         "title": "用户信息",
         "initApi": {
           "method": "get",
-          "url": "${DIRECTUS_URL}/users/me"
+          "url": "${DIRECTUS_URL}/users/me",
+          "data": {
+            "fields": ["*", "role.name"]
+          }
         },
         "body": [
           {
@@ -20,7 +23,7 @@
           },
           {
             "type": "input-text",
-            "name": "role",
+            "name": "role.name",
             "label": "角色："
           },
           {
