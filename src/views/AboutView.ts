@@ -74,7 +74,6 @@ export default {
   body: {
     type: 'crud',
     syncLocation: false, // 重要!! 否则对部署在子目录下的vue应用有影响!
-    canAccessSuperData: false, // 禁止所有列访问父级数据域，防止filter字段名冲突!
     api: {
       method: 'get',
       url: '${DIRECTUS_URL}/items/app02_product',
