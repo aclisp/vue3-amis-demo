@@ -85,10 +85,10 @@ export default {
             _neq: 'archived',
           },
           name: {
-            _icontains: '${name|default:undefined}',
+            _icontains: '${filter_name|default:undefined}',
           },
           current_price: {
-            _gte: '${price|default:undefined}',
+            _gte: '${filter_price|default:undefined}',
           },
         },
         sort: ['-date_created'],
@@ -102,12 +102,12 @@ export default {
       body: [
         {
           type: 'input-text',
-          name: 'name',
+          name: 'filter_name',
           label: '名称',
         },
         {
           type: 'input-number',
-          name: 'price',
+          name: 'filter_price',
           label: '价格 >=',
         },
         {
