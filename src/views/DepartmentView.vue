@@ -65,7 +65,6 @@ const schema = {
         type: 'crud',
         id: 'department-users',
         syncLocation: false,
-        canAccessSuperData: false,
         api: {
           method: 'get',
           url: '${DIRECTUS_URL}/items/app01_user_app01_department',
