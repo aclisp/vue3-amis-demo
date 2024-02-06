@@ -165,6 +165,8 @@ export const useAuthStore = defineStore('authStore', () => {
         return true;
       } else {
         console.error(`token refresh failure`);
+        stateClear();
+        storageClear();
         return false;
       }
     };
