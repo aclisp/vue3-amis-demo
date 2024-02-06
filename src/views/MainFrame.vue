@@ -3,17 +3,25 @@ import { useAppStore } from '@/stores/app';
 import { ArrowRight } from '@element-plus/icons-vue';
 import TheMenuAside from '@/components/TheMenuAside.vue';
 import TheUserIndicator from '@/components/TheUserIndicator.vue';
+import { ref } from 'vue';
 
 const app = useAppStore();
+const toggle = ref(null);
+
+function resetToggle() {
+  const elButton = toggle.value as any;
+  elButton.ref.blur();
+}
 </script>
 
 <template>
   <el-container class="layout-container">
-    <el-drawer v-model="app.drawer" size="50%" direction="ltr" :with-header="false">
+    <el-drawer v-model="app.drawer" @close="resetToggle" size="60%" direction="ltr" :with-header="false">
       <TheMenuAside />
     </el-drawer>
     <el-header height="56px" class="layout-header">
       <el-button
+        ref="toggle"
         class="expand-toggle hidden-sm-and-up"
         :icon="ArrowRight"
         size="large"
